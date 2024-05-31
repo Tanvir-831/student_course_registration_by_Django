@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>update course</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h3 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        form {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        select, button {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add new Course for {{ student.name }}</h1>
+
+    <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+        <h3>Registered Courses</h3>
+        {% for course in registered_courses %}
+        <p>{{ course.course_name }}</p>
+        {% endfor %}
+    </div>
+    <form action="{% url 'update_course' student.student_id %}" method="POST">
+        {% csrf_token %}
+        <select name="course_id">
+            {% for course in available_courses %}
+            <option value="{{ course.course_id }}">{{ course.course_name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Add Course</button>
+    </form>
+    <a href="{% url 'student_info' student.pk %}">Back</a>
+</body>
+</html>

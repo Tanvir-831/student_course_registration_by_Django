@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+        h3 {
+            color: #555;
+        }
+        a {
+            display: block;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <div style="border: 1px solid black; padding: 25px; margin-top: 20px;">
+            <h1>Student Info</h1>
+            <p>Name: {{ student.name }}</p>
+            <p>Student Id: {{ student.student_id }}</p>
+        
+            <h3>Registered Courses</h3>
+            {% for course in registered_courses %}
+            <p>{{ course.course_name }}<a href="{% url 'remove_course' student.student_id course.course_id %}">remove</a></p> 
+            {% endfor %}
+        </div>
+        <div style="margin-top: 15px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <a href="{% url 'update_course' student.student_id %}">Add New Course</a>
+            <a href="{% url 'home' %}">Back</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home page</title>
+</head>
+<body>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <div style="border: 1px solid black; padding: 25px;">
+            <h1>Available Courses</h1>
+            {% for course in courses %}
+            <p><strong>{{ course.course_id }}:</strong> {{ course.course_name }}</p>
+            {% endfor %}
+        </div>
+        <div style="border: 1px solid black; padding: 25px; margin-left: 20px;">
+            <h2>Search Student</h2>
+            <form action="{% url 'home' %}" method="GET">
+                <input type="text" id="student_id" name="student_id" required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+
+
+</body>
+</html>
